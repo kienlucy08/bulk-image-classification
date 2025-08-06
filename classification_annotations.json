@@ -1,0 +1,130 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "file_name": "2023-06-21-22-37-07_61.jpg",
+      "width": 4864,
+      "height": 3648
+    },
+    {
+      "id": 2,
+      "file_name": "440073c4_20220803T173412_DJI_0037_7049622.jpg",
+      "width": 5472,
+      "height": 3078
+    },
+    {
+      "id": 3,
+      "file_name": "440073c4_20220803T173456_DJI_0059_6946321.jpg",
+      "width": 5472,
+      "height": 3078
+    },
+    {
+      "id": 4,
+      "file_name": "440073c4_20220803T173516_DJI_0069_7656077.jpg",
+      "width": 5472,
+      "height": 3078
+    },
+    {
+      "id": 5,
+      "file_name": "4e586b11_20230110T172023_DJI_0130_9208802.jpg",
+      "width": 5472,
+      "height": 3648
+    },
+    {
+      "id": 6,
+      "file_name": "585f9860adec4c51bb157c7c5667d18a.jpg",
+      "width": 4864,
+      "height": 3648
+    },
+    {
+      "id": 7,
+      "file_name": "585f9860adec4c51bb157ca3eb32804e.jpg",
+      "width": 4864,
+      "height": 3648
+    },
+    {
+      "id": 8,
+      "file_name": "585f9860adec4c51bb157cfa10eb9568.jpg",
+      "width": 4864,
+      "height": 3648
+    },
+    {
+      "id": 9,
+      "file_name": "d08ecce2_20230110T214225_DJI_0430_8563058.jpg",
+      "width": 5472,
+      "height": 3648
+    },
+    {
+      "id": 10,
+      "file_name": "point-cloud-of-cell-tower-for-inspection.jpg",
+      "width": 1200,
+      "height": 638
+    }
+  ],
+  "annotations": [
+    {
+      "id": 1,
+      "image_id": 1,
+      "category_id": 0
+    },
+    {
+      "id": 2,
+      "image_id": 2,
+      "category_id": 0
+    },
+    {
+      "id": 3,
+      "image_id": 3,
+      "category_id": 0
+    },
+    {
+      "id": 4,
+      "image_id": 4,
+      "category_id": 0
+    },
+    {
+      "id": 5,
+      "image_id": 5,
+      "category_id": 0
+    },
+    {
+      "id": 6,
+      "image_id": 6,
+      "category_id": 0
+    },
+    {
+      "id": 7,
+      "image_id": 7,
+      "category_id": 0
+    },
+    {
+      "id": 8,
+      "image_id": 8,
+      "category_id": 0
+    },
+    {
+      "id": 9,
+      "image_id": 9,
+      "category_id": 0
+    },
+    {
+      "id": 10,
+      "image_id": 10,
+      "category_id": 0
+    }
+  ],
+  "categories": [
+    {
+      "id": 0,
+      "name": "monopole"
+    },
+    {
+      "id": 1,
+      "name": "lattice-s"
+    },
+    {
+      "id": 2,
+      "name": "lattice-g"
+    }
+  ]
+}
