@@ -2,20 +2,8 @@ import os
 import json
 from PIL import Image
 
-# Map folder names to COCO category ids
-CATEGORY_MAP = {
-    "monopole": 0,
-    "lattice-s": 1,
-    "lattice-g": 2
-}
-
-def get_image_size(image_path):
-    try:
-        with Image.open(image_path) as img:
-            return img.size  # width, height
-    except Exception as e:
-        print(f"Could not open {image_path}: {e}")
-        return 0, 0
+# Map folder names to label classes
+VALID_CLASSES = ["monopole", "lattice-s", "lattice-g"]
 
 def prompt_for_folders():
     folder_to_label_map = {}
@@ -30,8 +18,8 @@ def prompt_for_folders():
             continue
 
         label = input("Enter label for this folder (monopole, lattice-s, lattice-g): ").strip().lower()
-        if label not in CATEGORY_MAP:
-            print("Invalid label. Must be one of: monopole, lattice-s, lattice-g.")
+        if label not in VALID_CLASSES:
+            print("Invalid label. Must be one of:", ", ".join(VALID_CLASSES))
             continue
 
         folder_to_label_map[folder] = label
@@ -39,53 +27,28 @@ def prompt_for_folders():
 
     return folder_to_label_map
 
-def generate_coco_classification(folder_to_label_map, output_file="classification_annotations.json"):
-    images = []
-    annotations = []
-    categories = [{"id": v, "name": k} for k, v in CATEGORY_MAP.items()]
-    
-    annotation_id = 1
-    image_id = 1
+def generate_roboflow_classification_json(folder_to_label_map, output_file="roboflow_classification.json"):
+    classification_data = []
 
     for folder, label in folder_to_label_map.items():
-        category_id = CATEGORY_MAP[label]
         for fname in os.listdir(folder):
             if not fname.lower().endswith(('.jpg', '.jpeg', '.png')):
                 continue
-            
-            img_path = os.path.join(folder, fname)
-            width, height = get_image_size(img_path)
 
-            images.append({
-                "id": image_id,
-                "file_name": fname,
-                "width": width,
-                "height": height
+            classification_data.append({
+                "image": fname,
+                "class": label
             })
-
-            annotations.append({
-                "id": annotation_id,
-                "image_id": image_id,
-                "category_id": category_id
-            })
-
-            annotation_id += 1
-            image_id += 1
-
-    coco_dict = {
-        "images": images,
-        "annotations": annotations,
-        "categories": categories
-    }
 
     with open(output_file, 'w') as f:
-        json.dump(coco_dict, f, indent=2)
+        json.dump(classification_data, f, indent=2)
 
-    print(f"\nDone! COCO-style classification file saved to: {output_file}")
+    print(f"\nRoboflow-style classification file saved to: {output_file}")
 
 if __name__ == "__main__":
     folder_label_map = prompt_for_folders()
     if folder_label_map:
-        generate_coco_classification(folder_label_map)
+        generate_roboflow_classification_json(folder_label_map)
     else:
         print("No folders were provided. Exiting.")
+
