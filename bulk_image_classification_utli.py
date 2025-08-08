@@ -81,7 +81,7 @@ def build_coco(folder, out, label):
     with open(out, "w", encoding="utf-8") as f:
         json.dump(coco, f, indent=2)
     # confirm for debug
-    print(f"Wrote {out} with {len(images)} images.")
+    print(f"\nWrote {out} with {len(images)} images.")
 
 if __name__ == "__main__":
     # cli arguments
@@ -93,13 +93,13 @@ if __name__ == "__main__":
     args = ap.parse_args()
 
     if not args.folder:
-        folder = input("Enter the path to your folder of images: ").strip()
+        folder = input("\nEnter the path to your folder of images: ").strip()
     else:
         folder = args.folder
     
     # if no label ask user
     if not args.label:
-        print("Choose a label:")
+        print("\nChoose a label:")
         for i, k in enumerate(CATEGORY_IDS.keys(), start=1):
             print(f"  {i}) {k}")
         choice = input("Enter 1/2/3: ").strip()
