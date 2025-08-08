@@ -6,10 +6,13 @@ This utility tool allows users to **bulk classify folders of images** into categ
 ---
 
 ## What it Does
-- Takes in multiple folders of images
-- Each folder is labeled by the user with a tower type
-- Outputs a single `classification_annotations.json` file in **COCO Format** that maps each image to its category.
-- Supports `.jpg`, `.jpeg`, `.png` image formats
+- Processes all images in a single folder (using recursion)
+- Lets you choose on elabel for the entire folder via:
+  - `--label` argument (non-interactive)
+  - Interactive prompt (if no `--label` provided)
+- Outputs a single `coco_annotations.json` file in **COCO Format** that maps each image to its category.
+- Supports `.jpg`, `.jpeg`, `.png`, `.bmp`, `.tif`, `.tiff`, `.webp` image formats
+- Automatically records image dimentions and assigns a  **full-image bounding box** (required by many COCO readers)
 
 ---
 
@@ -19,11 +22,23 @@ This utility tool allows users to **bulk classify folders of images** into categ
 pip install pillow
 ```
 2. Run the script!
-3. Follow the prompts
-    You will be asked to:
-    - Enter one or more folder paths containing images
-    - Assign a label (`monopole`, `lattice-s`, `lattice-g`) to each folder
-    Type `done` when done adding folders
+Option A - Specify label directly (non-interactive)
+```bash
+python bulk_image_classification_utli.py /path/to/images --label monopole --out /path/to/images/coco_annotations.json
+```
+Option B - Let the script prompt you
+```bash
+python bulk_image_classification_utli.py /path/to/images --out /path/to/images/coco_annotations.json
+```
+Example Prompt:
+```css
+Choose a label:
+  1) monopole
+  2) lattice-s
+  3) lattice-g
+Enter 1/2/3: 1
+```
+
 ### Example Prompt Flow
 ```typescript
 Enter image folder path (or type 'done'): /Users/lucy/images/monopole
@@ -37,29 +52,32 @@ Added /Users/lucy/images/lattice as 'lattice-s'
 Enter image folder path (or type 'done'): done
 ```
 4. Output
-A file named `classification_annotations.json` will be created in the current directory, containing the images and annotations in the following format:
+A file named `coco_annotations.json` will be created in the current directory, containing the images and annotations in the following format:
 
 ```json
 {
+  "info": {
+    "description": "All images labeled 'monopole'",
+    "version": "1.0",
+    "year": 2025
+  },
+  "licenses": [],
+  "categories": [
+    { "id": 1, "name": "monopole", "supercategory": "" },
+    { "id": 2, "name": "lattice-s", "supercategory": "" },
+    { "id": 3, "name": "lattice-g", "supercategory": "" }
+  ],
   "images": [
-    {
-      "id": 1,
-      "file_name": "image001.jpg",
-      "width": 640,
-      "height": 480
-    }
+    { "id": 1, "file_name": "tower1.jpg", "width": 640, "height": 480 }
   ],
   "annotations": [
     {
       "id": 1,
       "image_id": 1,
-      "category_id": 0
-    }
-  ],
-  "categories": [
-    {
-      "id": 0,
-      "name": "monopole"
+      "category_id": 1,
+      "iscrowd": 0,
+      "bbox": [0, 0, 640, 480],
+      "area": 307200
     }
   ]
 }
@@ -71,9 +89,9 @@ A file named `classification_annotations.json` will be created in the current di
 The following labels are supported and mapped to COCO category IDs
 | Label     | COCO Category ID |
 | --------- | ---------------- |
-| monopole  | 0                |
-| lattice-s | 1                |
-| lattice-g | 2                |
+| monopole  | 1                |
+| lattice-s | 2                |
+| lattice-g | 3                |
 
 ---
 

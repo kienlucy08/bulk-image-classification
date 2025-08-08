@@ -85,12 +85,17 @@ def build_coco(folder, out, label):
 
 if __name__ == "__main__":
     # cli arguments
-    ap = argparse.ArgumentParser()
-    ap.add_argument("folder", help="Folder containing images (will recurse)")
+    ap = argparse.ArgumentParser(description="Bulk classify images into COCO format.")
+    ap.add_argument("folder", nargs="?", help="Folder containing images (will recurse)")
     ap.add_argument("--label", choices=list(CATEGORY_IDS.keys()),
                     help="Label to apply to all images in the folder")
-    ap.add_argument("--out", default="annotations/coco_annotations.json")
+    ap.add_argument("--out", default="data/coco_annotations.json")
     args = ap.parse_args()
+
+    if not args.folder:
+        folder = input("Enter the path to your folder of images: ").strip()
+    else:
+        folder = args.folder
     
     # if no label ask user
     if not args.label:
@@ -99,9 +104,14 @@ if __name__ == "__main__":
             print(f"  {i}) {k}")
         choice = input("Enter 1/2/3: ").strip()
         try:
-            args.label = list(CATEGORY_IDS.keys())[int(choice)-1]
+            label = list(CATEGORY_IDS.keys())[int(choice)-1]
         except Exception:
             raise SystemExit("Invalid choice. Please rerun and select a valid label.")
+    else:
+        label = args.label
 
-    build_coco(args.folder, args.out, args.label)
+    out_path = args.out if args.out else "data/coco_annotations.json"
+
+
+    build_coco(folder, out_path, label)
 
