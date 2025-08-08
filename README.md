@@ -22,11 +22,11 @@ This utility tool allows users to **bulk classify folders of images** into categ
 pip install pillow
 ```
 2. Run the script!
-Option A - Specify label directly (non-interactive)
+- Option A - Specify label directly (non-interactive)
 ```bash
 python bulk_image_classification_utli.py /path/to/images --label monopole --out /path/to/images/coco_annotations.json
 ```
-Option B - Let the script prompt you
+- Option B - Let the script prompt you
 ```bash
 python bulk_image_classification_utli.py 
 ```
