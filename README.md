@@ -28,30 +28,20 @@ python bulk_image_classification_utli.py /path/to/images --label monopole --out 
 ```
 Option B - Let the script prompt you
 ```bash
-python bulk_image_classification_utli.py /path/to/images --out /path/to/images/coco_annotations.json
+python bulk_image_classification_utli.py 
 ```
 Example Prompt:
 ```css
+Enter the path to your folder of images: path/to/images
+
 Choose a label:
   1) monopole
   2) lattice-s
   3) lattice-g
 Enter 1/2/3: 1
+Wrote path\to\images\coco_annotations.json with X images
 ```
-
-### Example Prompt Flow
-```typescript
-Enter image folder path (or type 'done'): /Users/lucy/images/monopole
-Enter label for this folder (monopole, lattice-s, lattice-g): monopole
-Added /Users/lucy/images/monopole as 'monopole'
-
-Enter image folder path (or type 'done'): /Users/lucy/images/lattice
-Enter label for this folder (monopole, lattice-s, lattice-g): lattice-s
-Added /Users/lucy/images/lattice as 'lattice-s'
-
-Enter image folder path (or type 'done'): done
-```
-4. Output
+3. Output
 A file named `coco_annotations.json` will be created in the current directory, containing the images and annotations in the following format:
 
 ```json
