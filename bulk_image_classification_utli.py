@@ -94,9 +94,9 @@ def build_coco(folder, out, tower_label, section_label):
     coco = {
         "info": {"description": f"All images labeled with '{tower_label}' + '{section_label}'","version": "1.0", "year": 2025},
         "licenses": [],
-        "categories": [{"id": CATEGORY_IDS["monopole"], "name": "monopole", "supercategory": ""},
-                       {"id": CATEGORY_IDS["lattice-s"], "name": "lattice-s", "supercategory": ""},
-                       {"id": CATEGORY_IDS["lattice-g"], "name": "lattice-g", "supercategory": ""},
+        "categories": [{"id": CATEGORY_IDS["monopole"], "name": "monopole", "supercategory": "tower"},
+                       {"id": CATEGORY_IDS["lattice-s"], "name": "lattice-s", "supercategory": "tower"},
+                       {"id": CATEGORY_IDS["lattice-g"], "name": "lattice-g", "supercategory": "tower"},
                        {"id": CATEGORY_IDS["top"], "name": "top", "supercategory": "section"},
                        {"id": CATEGORY_IDS["bottom"], "name": "bottom", "supercategory": "section"},
                        {"id": CATEGORY_IDS["unclassified"], "name": "unclassified", "supercategory": "section"}],
